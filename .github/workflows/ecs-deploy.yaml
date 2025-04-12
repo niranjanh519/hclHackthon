@@ -1,0 +1,26 @@
+name: Deploy to ECS Fargate
+
+on:
+  workflow_run:
+    workflows: ["Docker Build & Push"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::<aws_account_id>:role/github-actions-role
+          aws-region: us-east-1
+
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: taskdef.json
+          service: my-app-service
+          cluster: fargate-cluster
+          wait-for-service-stability: true
