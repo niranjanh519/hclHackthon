@@ -1,4 +1,4 @@
-#Provision a VPC with public and private subnets
+#Provision a VPC with public and private subnet
 provider "aws" {
   region = "us-east-1"
 }
