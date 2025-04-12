@@ -23,15 +23,17 @@ jobs:
         run: terraform fmt -check
 
       - name: Terraform Init
-        paths:
-          - 'hclHackthon/terraform'
-        run: terraform init
+        run: |
+          cd hclHackthon/terraform
+          terraform init
 
       - name: Terraform Plan
-        paths:
-          - 'hclHackthon/terraform
-        run: terraform plan
+        run: |
+          cd hclHackthon/terraform
+          terraform plan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve
+        run: |
+          cd hclHackthon/terraform
+          terraform apply -auto-approve
