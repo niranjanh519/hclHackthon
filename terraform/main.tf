@@ -3,36 +3,36 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_vpc" "nhhakathon" {
+resource "aws_vpc" "nhakathon" {
   cidr_block = "10.0.0.0/16"
 }
 
 resource "aws_subnet" "public" {
-  vpc_id                  = aws_vpc.nhhakathon.id
+  vpc_id                  = aws_vpc.nhakathon.id
   cidr_block              = "10.0.1.0/24"
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "public_2" {
-  vpc_id                  = aws_vpc.nhhakathon.id
+  vpc_id                  = aws_vpc.nhakathon.id
   cidr_block              = "10.0.2.0/24"
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 }
 
 resource "aws_subnet" "private" {
-  vpc_id                  = aws_vpc.nhhakathon.id
+  vpc_id                  = aws_vpc.nhakathon.id
   cidr_block              = "10.0.3.0/24"
   availability_zone       = "us-east-1a"
 }
 
 resource "aws_internet_gateway" "gw" {
-  vpc_id = aws_vpc.nhhakathon.id
+  vpc_id = aws_vpc.nhakathon.id
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.nhhakathon.id
+  vpc_id = aws_vpc.nhakathon.id
 }
 
 resource "aws_route" "internet" {
@@ -114,13 +114,13 @@ resource "aws_ecr_repository" "ecs-repo" {
 resource "aws_security_group" "security_group" {
   name        = "security_group"
   description = "Allow traffic"
-  vpc_id      = aws_vpc.nhhakathon.id
+  vpc_id      = aws_vpc.nhakathon.id
 }
 
 resource "aws_security_group" "alb_security_group" {
   name        = "alb_security_group"
   description = "Allow HTTP traffic for ALB"
-  vpc_id      = aws_vpc.nhhakathon.id
+  vpc_id      = aws_vpc.nhakathon.id
 }
 
 resource "aws_security_group_rule" "allow_http" {
@@ -146,7 +146,7 @@ resource "aws_lb_target_group" "app_target_group" {
   name     = "app-target-group"
   port     = 80
   protocol = "HTTP"
-  vpc_id   = aws_vpc.nhhakathon.id
+  vpc_id   = aws_vpc.nhakathon.id
 }
 
 resource "aws_lb_listener" "http_listener" {
