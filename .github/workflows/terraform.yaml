@@ -3,7 +3,7 @@ name: Terraform
 on:
   push:
     paths:
-      - '**.tf'
+      - 'hclHackthon/terraform/main.tf'
   pull_request:
 
 jobs:
