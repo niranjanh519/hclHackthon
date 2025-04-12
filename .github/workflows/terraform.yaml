@@ -25,16 +25,16 @@ jobs:
       - name: Terraform Init
         run: |
           pwd
-          cd hclHackthon/terraform
+          cd terraform
           terraform init
 
       - name: Terraform Plan
         run: |
-          cd hclHackthon/terraform
+          cd terraform
           terraform plan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
         run: |
-          cd hclHackthon/terraform
+          cd terraform
           terraform apply -auto-approve
