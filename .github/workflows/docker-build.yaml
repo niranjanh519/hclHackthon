@@ -1,7 +1,10 @@
 name: Docker Build & Push
 
 on:
-  push:
+  workflow_run:
+    workflows: ["Terraform"]
+    types:
+      - completed
     branches: [main]
     paths:
       - '**/Dockerfile'
