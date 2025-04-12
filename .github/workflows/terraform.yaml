@@ -24,6 +24,7 @@ jobs:
 
       - name: Terraform Init
         run: |
+          pwd
           cd hclHackthon/terraform
           terraform init
 
